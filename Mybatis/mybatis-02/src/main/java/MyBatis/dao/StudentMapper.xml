@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MyBatis.dao.StudentMapper">
+    <select id="getStudents" resultMap="TC">
+        select * from student
+    </select>
+    <resultMap id="TC" type="MyBatis.pojo.Student">
+        <association property="teacher" column="tid" javaType="MyBatis.pojo.Teacher" select="getTeacher"/>
+    </resultMap>
+    <select id="getTeacher" resultType="MyBatis.pojo.Teacher">
+        select * from teacher where id = #{id}
+    </select>
+</mapper>
